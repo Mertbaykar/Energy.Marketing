@@ -1,0 +1,2 @@
+https://seffaflik.epias.com.tr/transparency/technical/tr/#_sistem_marjinal_fiyat_servisi
+Request gönderirken datetime format örneği : 1998.01.22
