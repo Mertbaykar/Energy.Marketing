@@ -10,18 +10,16 @@ namespace Energy.Marketing.Controllers
     public class SMFRestController : ControllerBase
     {
         [HttpGet]
-        public ActionResult GetMarginalPrices(DateTime startDate, DateTime endDate, string? region)
+        public async Task<ActionResult> GetMarginalPrices(DateTime startDate, DateTime endDate, string? region)
         {
             try
             {
-                List<SMPResponse> result = new();
-
-                for (int i = 0; i < 3; i++)
-                {
-                    var smpResponse = SMPResponseGenerator.Generate();
-                    result.Add(smpResponse);
-                }
-                return Ok(result);
+                var url = Constants.RootUrl + "/transparency/service/market/smp";
+                string finalUrl = HttpClientHelper.CreateUrl(url, startDate, endDate);
+                HttpClient client = new HttpClient();
+                var result = await client.GetAsync(finalUrl);
+                var sMPResponse = await result.Content.ReadFromJsonAsync<SMPResponse>();
+                return Ok(sMPResponse);
             }
             catch (Exception ex)
             {
