@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.Models", "Marketi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.Helpers", "Marketing.Helpers\Marketing.Helpers.csproj", "{F29C0541-2E31-4B93-A64C-BD284EFD0188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONConverters", "JSONConverters\JSONConverters.csproj", "{764A997B-4737-490E-A6C5-7C47D333D80F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketing.Shared", "Marketing.Shared\Marketing.Shared.csproj", "{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{F29C0541-2E31-4B93-A64C-BD284EFD0188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F29C0541-2E31-4B93-A64C-BD284EFD0188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29C0541-2E31-4B93-A64C-BD284EFD0188}.Release|Any CPU.Build.0 = Release|Any CPU
-		{764A997B-4737-490E-A6C5-7C47D333D80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{764A997B-4737-490E-A6C5-7C47D333D80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{764A997B-4737-490E-A6C5-7C47D333D80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{764A997B-4737-490E-A6C5-7C47D333D80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

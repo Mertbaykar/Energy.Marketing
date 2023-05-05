@@ -9,23 +9,37 @@ namespace Energy.Marketing.Controllers
     [ApiController]
     public class SMFRestController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<ActionResult> GetMarginalPrices(DateTime startDate, DateTime endDate, string? region)
         {
             try
             {
-                var url = Constants.RootUrl + "/transparency/service/market/smp";
-                string finalUrl = HttpClientHelper.CreateUrl(url, startDate, endDate);
-                HttpClient client = new HttpClient();
-                var result = await client.GetAsync(finalUrl);
-                var sMPResponse = await result.Content.ReadFromJsonAsync<SMPResponse>();
-                return Ok(sMPResponse);
+                var url = Constants.MarginalPriceUrl;
+                var result = await HttpClientHelper.GetFromUrlAsync<SMPResponse>(url, startDate, endDate, region);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
           
+        }
+
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult> GetPTFAndSMF(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var url = Constants.PTFAndSMFUrl;
+                var result = await HttpClientHelper.GetFromUrlAsync<McpSmpResponse>(url, startDate, endDate);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
         }
     }
 }

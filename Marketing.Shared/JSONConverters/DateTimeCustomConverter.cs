@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace JSONConverters
+namespace Marketing.Shared.JSONConverters
 {
     public class DateTimeCustomConverter : JsonConverter<DateTime>
     {
@@ -24,7 +24,7 @@ namespace JSONConverters
             {
                 throw new Exception(ex.Message);
             }
-          
+
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)

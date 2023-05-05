@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Marketing.Helpers\Marketing.Helpers.csproj" />
     <ProjectReference Include="..\Marketing.Models\Marketing.Models.csproj" />
+    <ProjectReference Include="..\Marketing.Shared\Marketing.Shared.csproj" />
   </ItemGroup>
 
 </Project>
