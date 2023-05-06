@@ -1,7 +1,6 @@
 ﻿using Energy.Marketing.Bases;
-using Marketing.Helpers;
 using Marketing.Models;
-using Microsoft.AspNetCore.Http;
+using Marketing.Shared.HttpClients;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Energy.Marketing.Controllers
@@ -10,20 +9,27 @@ namespace Energy.Marketing.Controllers
     [ApiController]
     public class SMFRestController : ApiControllerBase
     {
+        private readonly SmpClient _smpClient;
+        private readonly PtfSmpClient _ptfSmpClient;
+        public SMFRestController(SmpClient smpClient, PtfSmpClient ptfSmpClient)
+        {
+            _smpClient = smpClient;
+            _ptfSmpClient = ptfSmpClient;
+        }
+
         [HttpGet("[action]")]
         public async Task<ActionResult> GetMarginalPrices(DateTime startDate, DateTime endDate, string? region)
         {
             try
             {
-                var url = Constants.MarginalPriceUrl + Request.QueryString.Value;
-                var result = await HttpClientHelper.GetFromUrlAsync<SMPResponse>(url);
+                var result = await _smpClient.GetAsync<SMPResponse>(Request.QueryString.Value!);
                 return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
-          
+
         }
 
 
@@ -32,8 +38,7 @@ namespace Energy.Marketing.Controllers
         {
             try
             {
-                var url = Constants.PTFAndSMFUrl + Request.QueryString.Value;
-                var result = await HttpClientHelper.GetFromUrlAsync<McpSmpResponse>(url);
+                var result = await _ptfSmpClient.GetAsync<McpSmpResponse>(Request.QueryString.Value!);
                 return Ok(result);
             }
             catch (Exception ex)

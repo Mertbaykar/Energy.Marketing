@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Marketing.Helpers
+namespace Marketing.Shared
 {
     public class Constants
     {
@@ -12,7 +12,7 @@ namespace Marketing.Helpers
 
         #region Partials
         private const string MarginalPricePartialUrl = "/transparency/service/market/smp";
-        private const string PTFAndSMFPartialUrl = "/transparency/service/market/mcp-smp"; 
+        private const string PTFAndSMFPartialUrl = "/transparency/service/market/mcp-smp";
         private const string GIPAOFPartialUrl = "/transparency/service/market/intra-day-aof-average";
         #endregion
 

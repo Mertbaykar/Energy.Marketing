@@ -1,8 +1,7 @@
 ﻿using Energy.Marketing.Bases;
-using Marketing.Helpers;
 using Marketing.Models;
 using Marketing.Shared.Enums;
-using Microsoft.AspNetCore.Http;
+using Marketing.Shared.HttpClients;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Energy.Marketing.Controllers
@@ -11,13 +10,19 @@ namespace Energy.Marketing.Controllers
     [ApiController]
     public class GİPAOFController : ApiControllerBase
     {
+        private readonly GipAofClient _gipAofClient;
+
+        public GİPAOFController(GipAofClient gipAofClient)
+        {
+            _gipAofClient = gipAofClient;
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetGIPAOF(DateTime startDate, DateTime endDate, Period period)
         {
             try
             {
-                var url = Constants.GIPAOFUrl + Request.QueryString.Value;
-                var result = await HttpClientHelper.GetFromUrlAsync<IntradayAofAverangeResponse>(url);
+                var result = await _gipAofClient.GetAsync<IntradayAofAverangeResponse>(Request.QueryString.Value!);
                 return Ok(result);
             }
             catch (Exception ex)
