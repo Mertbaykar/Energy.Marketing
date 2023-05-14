@@ -1,2 +1,12 @@
 https://seffaflik.epias.com.tr/transparency/technical/tr/#_sistem_marjinal_fiyat_servisi
 Request gönderirken datetime format örneği : 1998.01.22
+
+
+Migration Command Example
+
+- Add
+add-migration Init -OutputDir .\Migrations -Context MarketingContext
+
+- Update
+update-database -Context MarketingContext
+

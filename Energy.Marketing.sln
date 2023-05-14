@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.Models", "Marketi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.Shared", "Marketing.Shared\Marketing.Shared.csproj", "{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketing.EF.Core", "Marketing.EF.Core\Marketing.EF.Core.csproj", "{A8320588-D695-49D0-AB2F-D0DA6A3E257D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketing.ScheduledTasks", "Marketing.ScheduledTasks\Marketing.ScheduledTasks.csproj", "{B6F4BBC6-003D-4726-9907-FD8AB477C60A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7F8C3D-5FA5-45E2-99BD-31B28AB46869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8320588-D695-49D0-AB2F-D0DA6A3E257D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8320588-D695-49D0-AB2F-D0DA6A3E257D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8320588-D695-49D0-AB2F-D0DA6A3E257D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8320588-D695-49D0-AB2F-D0DA6A3E257D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F4BBC6-003D-4726-9907-FD8AB477C60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F4BBC6-003D-4726-9907-FD8AB477C60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F4BBC6-003D-4726-9907-FD8AB477C60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F4BBC6-003D-4726-9907-FD8AB477C60A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
