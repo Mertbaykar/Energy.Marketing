@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Marketing.Models.Entities
 {
-    [Table("Services")]
+    [Table("ScheduledServices")]
     public class Service : EntityBase
     {
         public string Name { get; set; }

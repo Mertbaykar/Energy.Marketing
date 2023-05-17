@@ -1,5 +1,6 @@
 using Marketing.EF.Core;
 using Marketing.ScheduledTasks;
+using Marketing.Shared.HttpClients;
 using Microsoft.EntityFrameworkCore;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -10,6 +11,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) =>
     {
+        services.AddHttpClient<SmpClient>();
         services.AddDbContextFactory<MarketingContext>(options => options.UseSqlServer(context.Configuration.GetConnectionString("sqlConnection")));
         services.AddHostedService<Worker>();
     })

@@ -1,4 +1,5 @@
 using Marketing.EF.Core;
+using Marketing.Shared.HttpClients;
 using Microsoft.EntityFrameworkCore;
 
 namespace Marketing.ScheduledTasks
@@ -6,13 +7,15 @@ namespace Marketing.ScheduledTasks
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        IDbContextFactory<MarketingContext> _dbContextFactory;
-        IHostApplicationLifetime _applicationLifetime;
-        public Worker(IDbContextFactory<MarketingContext> dbContextFactory, ILogger<Worker> logger, IHostApplicationLifetime applicationLifetime)
+        private readonly IDbContextFactory<MarketingContext> _dbContextFactory;
+        private readonly IHostApplicationLifetime _applicationLifetime;
+        private readonly SmpClient _smpClient;
+        public Worker(IDbContextFactory<MarketingContext> dbContextFactory, ILogger<Worker> logger, IHostApplicationLifetime applicationLifetime, SmpClient smpClient)
         {
             _logger = logger;
             _dbContextFactory = dbContextFactory;
             _applicationLifetime = applicationLifetime;
+            _smpClient = smpClient;
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -31,14 +34,16 @@ namespace Marketing.ScheduledTasks
                 {
                     using (MarketingContext context = _dbContextFactory.CreateDbContext())
                     {
-                        // TODO: marketing context'in constructor'a parametre olarak geçildiði bir class olsun
-                        // Execute edilme vakti gelmiþ servisleri çekip taskName'leri aracýlýðýyla gerekli methodlarý çalýþtýralým
+                        var serviceRunner = new ServiceRunner(context);
+                        await serviceRunner.RunServicesAsync();
                     }
-                    _applicationLifetime.StopApplication();
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError("Program has failed: " + ex.Message);
+                }
+                finally
+                {
                     _applicationLifetime.StopApplication();
                 }
             }

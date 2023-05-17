@@ -4,6 +4,7 @@ using Marketing.EF.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marketing.EF.Core.Migrations
 {
     [DbContext(typeof(MarketingContext))]
-    partial class MarketingContextModelSnapshot : ModelSnapshot
+    [Migration("20230516225951_Services2ScheduledServices")]
+    partial class Services2ScheduledServices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

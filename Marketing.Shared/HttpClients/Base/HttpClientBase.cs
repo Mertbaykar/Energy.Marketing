@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using System.Web;
+using System.Runtime.CompilerServices;
+using Marketing.Shared.Enums;
 
 namespace Marketing.Shared.HttpClients.Base
 {
@@ -29,7 +32,6 @@ namespace Marketing.Shared.HttpClients.Base
         {
             try
             {
-                //HttpClient client = new HttpClient();
                 var responseMessage = await _httpClient.GetAsync(queryString);
                 var result = await responseMessage.Content.ReadFromJsonAsync<TResult>(JsonSerializerOptions);
                 return result;
@@ -38,6 +40,38 @@ namespace Marketing.Shared.HttpClients.Base
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Base Url'e Get request atar ve response'u <typeparamref name="TResult"/> tipinde cevap döner. Fonksiyon çağrılırken kullanılan parametre adları request esnasında kullanılır
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="period"></param>
+        /// <param name="region"></param>
+        /// <param name="startDateExpression"></param>
+        /// <param name="endDateExpression"></param>
+        /// <param name="periodExpression"></param>
+        /// <param name="regionExpression"></param>
+        /// <returns></returns>
+        public virtual async Task<TResult> GetAsync<TResult>(DateTime startDate, DateTime endDate, Period? period = null, string? region = null, [CallerArgumentExpression("startDate")] string startDateExpression = "startDate", [CallerArgumentExpression("endDate")] string endDateExpression = "endDate", [CallerArgumentExpression("period")] string periodExpression = "period", [CallerArgumentExpression("region")] string regionExpression = "region") where TResult : class
+        {
+            var builder = new UriBuilder(_httpClient.BaseAddress.ToString());
+            var query = HttpUtility.ParseQueryString(builder.Query);
+
+            query[startDateExpression] = startDate.ToString("yyyy-MM-dd");
+            query[endDateExpression] = endDate.ToString("yyyy-MM-dd");
+            if (period.HasValue)
+                query[periodExpression] = period.Value.ToString();
+            if (!string.IsNullOrEmpty(region))
+                query[regionExpression] = region;
+
+            var decodedUrl = HttpUtility.UrlDecode(query.ToString());
+            builder.Query = decodedUrl;
+            var responseMessage = await _httpClient.GetAsync(builder.ToString());
+            var result = await responseMessage.Content.ReadFromJsonAsync<TResult>(JsonSerializerOptions);
+            return result;
         }
     }
 }

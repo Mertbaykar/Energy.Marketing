@@ -22,7 +22,9 @@ namespace Energy.Marketing.Controllers
         {
             try
             {
-                var result = await _smpClient.GetAsync<SMPResponse>(Request.QueryString.Value!);
+                //var result = await _smpClient.GetAsync<SMPResponse>(Request.QueryString.Value!);
+                var result = await _smpClient.GetAsync<SMPResponse>(startDate, endDate, region: region);
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -38,7 +40,8 @@ namespace Energy.Marketing.Controllers
         {
             try
             {
-                var result = await _ptfSmpClient.GetAsync<McpSmpResponse>(Request.QueryString.Value!);
+                //var result = await _ptfSmpClient.GetAsync<McpSmpResponse>(Request.QueryString.Value!);
+                var result = await _ptfSmpClient.GetAsync<McpSmpResponse>(startDate, endDate);
                 return Ok(result);
             }
             catch (Exception ex)

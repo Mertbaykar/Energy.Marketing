@@ -22,7 +22,8 @@ namespace Energy.Marketing.Controllers
         {
             try
             {
-                var result = await _gipAofClient.GetAsync<IntradayAofAverangeResponse>(Request.QueryString.Value!);
+                //var result = await _gipAofClient.GetAsync<IntradayAofAverangeResponse>(Request.QueryString.Value!);
+                var result = await _gipAofClient.GetAsync<IntradayAofAverangeResponse>(startDate, endDate, period);
                 return Ok(result);
             }
             catch (Exception ex)
