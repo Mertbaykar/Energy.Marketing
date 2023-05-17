@@ -19,7 +19,20 @@ namespace Marketing.Shared.HttpClients.Base
             _httpClient = httpClient;
         }
         protected HttpClient _httpClient;
-        protected JsonSerializerOptions JsonSerializerOptions => new JsonSerializerOptions { WriteIndented = true, ReferenceHandler = ReferenceHandler.IgnoreCycles, PropertyNameCaseInsensitive = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+
+        private JsonSerializerOptions _jsonSerializerOptions = null;
+        protected JsonSerializerOptions JsonSerializerOptions
+        {
+            get
+            {
+                if (_jsonSerializerOptions == null)
+                {
+                    _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true, ReferenceHandler = ReferenceHandler.IgnoreCycles, PropertyNameCaseInsensitive = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+                }
+                return _jsonSerializerOptions;
+            }
+        }
+
 
         /// <summary>
         /// Base url ile <paramref name="queryString"/> birleşimi olan url'e Get request atar ve response'u <typeparamref name="TResult"/> tipinde cevap döner
@@ -55,17 +68,17 @@ namespace Marketing.Shared.HttpClients.Base
         /// <param name="periodExpression"></param>
         /// <param name="regionExpression"></param>
         /// <returns></returns>
-        public virtual async Task<TResult> GetAsync<TResult>(DateTime startDate, DateTime endDate, Period? period = null, string? region = null, [CallerArgumentExpression("startDate")] string startDateExpression = "startDate", [CallerArgumentExpression("endDate")] string endDateExpression = "endDate", [CallerArgumentExpression("period")] string periodExpression = "period", [CallerArgumentExpression("region")] string regionExpression = "region") where TResult : class
+        public virtual async Task<TResult> GetAsync<TResult>(DateTime startDate, DateTime endDate, Period? period = null, string? region = null) where TResult : class
         {
             var builder = new UriBuilder(_httpClient.BaseAddress.ToString());
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            query[startDateExpression] = startDate.ToString("yyyy-MM-dd");
-            query[endDateExpression] = endDate.ToString("yyyy-MM-dd");
+            query["startDate"] = startDate.ToString("yyyy-MM-dd");
+            query["endDate"] = endDate.ToString("yyyy-MM-dd");
             if (period.HasValue)
-                query[periodExpression] = period.Value.ToString();
+                query["period"] = period.Value.ToString();
             if (!string.IsNullOrEmpty(region))
-                query[regionExpression] = region;
+                query["region"] = region;
 
             var decodedUrl = HttpUtility.UrlDecode(query.ToString());
             builder.Query = decodedUrl;

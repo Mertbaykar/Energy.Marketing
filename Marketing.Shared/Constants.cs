@@ -14,10 +14,12 @@ namespace Marketing.Shared
         private const string MarginalPricePartialUrl = "/transparency/service/market/smp";
         private const string PTFAndSMFPartialUrl = "/transparency/service/market/mcp-smp";
         private const string GIPAOFPartialUrl = "/transparency/service/market/intra-day-aof-average";
+        private const string IDMIncomePartialUrl = "/transparency/service/market/intra-day-income";
         #endregion
 
         public const string MarginalPriceUrl = RootUrl + MarginalPricePartialUrl;
         public const string PTFAndSMFUrl = RootUrl + PTFAndSMFPartialUrl;
         public const string GIPAOFUrl = RootUrl + GIPAOFPartialUrl;
+        public const string IDMIncome = RootUrl + IDMIncomePartialUrl;
     }
 }

@@ -22,8 +22,7 @@ namespace Marketing.Models.Entities
         /// Service tetiklendiğinde çalışacak olan method adı
         /// </summary>
         public string WorkerTaskName { get; set; }
-        [NotMapped]
-        public DateTime NextExecutionDate => LastExecutionDate.AddMinutes(Interval);
+        
         [NotMapped]
         public bool ShouldExecute => ShouldServiceExecute();
 

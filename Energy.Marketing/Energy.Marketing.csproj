@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Marketing.EF.Core\Marketing.EF.Core.csproj" />
     <ProjectReference Include="..\Marketing.Models\Marketing.Models.csproj" />
     <ProjectReference Include="..\Marketing.Shared\Marketing.Shared.csproj" />
   </ItemGroup>
