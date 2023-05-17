@@ -1,4 +1,5 @@
 using Marketing.EF.Core;
+using Marketing.Models.Entities;
 using Marketing.Shared.HttpClients;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +16,10 @@ builder.Services.AddHttpClient<PtfSmpClient>();
 builder.Services.AddHttpClient<GipAofClient>();
 builder.Services.AddHttpClient<IDMClient>();
 
+builder.Services.AddDbContext<MarketingContext>(opts =>
+{
+    opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
+});
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -35,7 +40,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<MarketingContext>();
     db.Database.Migrate();
-} 
+}
 #endregion
 
 // Configure the HTTP request pipeline.
