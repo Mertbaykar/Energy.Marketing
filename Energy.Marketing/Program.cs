@@ -2,6 +2,7 @@ using Marketing.EF.Core;
 using Marketing.Models.Entities;
 using Marketing.Shared.HttpClients;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
@@ -20,6 +21,14 @@ builder.Services.AddDbContext<MarketingContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
 });
+
+
+builder.Services.AddCors(c => c.AddDefaultPolicy(options =>
+{
+    options.WithOrigins(builder.Configuration.GetValue<string>("ClientAdress"))
+     .AllowAnyHeader()
+     .AllowAnyMethod();
+}));
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -51,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
